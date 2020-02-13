@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <title>My To Do List</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/themes/hot-sneaks/jquery-ui.css">
+
+    <script type="text/javascript" src = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript" src = "https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="container1">
+  <div class="container2">
+    <h2>My To Do List</h2>
+    <input type="text" id="myInput" placeholder="請輸入代辦事項">
+    <span id="addButton" class="addButton">ADD</span>
+
+  </div>
+
+  <ul id="myList">
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      帶狗散步 <i  class="fas fa-times"></i>
+    </li>
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      停車費繳交 <i  class="fas fa-times"></i>
+    </li>
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      日常用品購買 <i  class="fas fa-times"></i>
+    </li>
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      打掃 <i  class="fas fa-times"></i>
+    </li>
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      報名表單寄出 <i  class="fas fa-times"></i>
+    </li>
+
+    <li class="todo">
+      <input type="checkbox" name="checkbox">
+      讀書 <i  class="fas fa-times"></i>
+    </li>
+
+  </ul>
+</div>
+
+
+  <script type="text/javascript">
+
+
+      $(document).ready(function() {
+
+        //新增代辦事項
+        $("#addButton").click(function() {
+          var inputValue = $("#myInput").val();
+          $("#myInput").val("");
+
+          if (inputValue == "")
+          {
+            alert("請輸入待辦事項");
+          }
+          else
+          {
+            $("#myList").append(
+              `<li class="todo">
+        <input type="checkbox" name="checkbox">
+        ${inputValue} <i class="fas fa-times"></i>
+      </li>`
+            );
+          }
+        });
+
+        //新增代辦事項之刪除
+        $(document).on("click", ".fa-times", function() {
+          console.log("delete item");
+          $(this).parent().remove();
+        });
+
+        //新增與取消代辦事項之cheched
+        $(document).on("click", ".todo", function() {
+          if ($(this).hasClass("alreadyDo"))
+          {
+            console.log("alreadyDo");
+            $(this).removeClass("alreadyDo");
+            $(this).children("input").prop("checked", false);
+          }
+          else
+          {
+            console.log("not alreadyDo");
+            $(this).addClass("alreadyDo");
+            $(this).children("input").prop("checked", true);
+          }
+        });
+      });
+    </script>
+</body>
+</html>
+
+<style>
+
+*{
+  box-sizing: border-box;
+  font-family: 微軟正黑體;
+}
+
+h2{
+  padding-top: 20px;
+  text-align: center;
+  color: #4ADD7E;
+}
+
+.container1{
+
+  width: 604px;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+
+}
+
+.container2{
+  width: 600px;
+  height: 150px;
+  background-color: black;
+  margin-top: -22px;
+
+}
+
+#myInput{
+  width: 75%;
+  height: 30px;
+  margin-left: 25px;
+  padding-left: 10px;
+  font-size: 20px;
+  border: none;
+  float: left;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.addButton{
+  background-color: #4ADD7E;
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 0px 5px 5px 0px;
+  float: left;
+}
+
+#addButton:hover{
+  cursor:pointer;
+  font-weight: bold;
+  background: #00A45F;
+}
+
+#myList{
+  width: 600px;
+  margin: auto;
+  padding: 0px;
+  font-weight: bold;
+  border: 1px solid black;
+
+
+}
+
+li{
+  height: 30px;
+  padding-left: 10px;
+  list-style-type: none;
+  font-size: 20px;
+
+}
+
+ li:nth-of-type(odd) {
+  background: #f9f9f9;
+}
+
+li:hover {
+  background: #ddd;
+}
+
+.alreadyDo{
+  color: #4870FF;
+  text-decoration: line-through;
+
+}
+
+/* 叉叉按鈕 */
+.fas{
+float: right;
+margin-top: 5px;
+padding-right: 10px;
+font-size: 20px;
+color:grey;
+font-size: 18px;
+text-align: center;
+}
+
+.fas:hover {
+  cursor:pointer;
+  font-size: 22px;
+  color: black;
+}
+
+
+
+</style>
